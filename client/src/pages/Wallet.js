@@ -11,6 +11,11 @@ import coinBase from "../assests/coinbase.png"
 
 import Polygon from "../assests/polygon.png";
 import klaytn from "../assests/klaytn.png";
+import { coinbaseWallet } from "../backendConnectors/coinbase";
+
+const DEFAULT_ETH_JSONRPC_URL = 'https://rpc-mumbai.maticvigil.com/'
+
+const DEFAULT_CHAIN_ID = 8001  
 
 function Wallet() {
 	const navigate = useNavigate();
@@ -85,12 +90,13 @@ function Wallet() {
 					</span>
 				</button>
 
-				<button className="wallet-collection__item">
+				<button className="wallet-collection__item"
+				onClick={()=>coinbaseWallet.makeWeb3Provider(DEFAULT_ETH_JSONRPC_URL, DEFAULT_CHAIN_ID)}>
 					<img src={coinBase} alt="" />
 
 					<span className="wallet-collection__item-name wallet-flex">
 						<span className="wallet-name">Coinbase Wallet</span>
-						<span className="coming-soon pacifico">{" (Coming Soon)"}</span>
+						{/* <span className="coming-soon pacifico">{" (Coming Soon)"}</span> */}
 					</span>
 				</button>
 

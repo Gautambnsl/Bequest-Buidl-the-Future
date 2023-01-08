@@ -16,7 +16,7 @@ function Home() {
 				<div className="intro-parent">
 					<Intro />
 
-					<Sponsors />
+					{/* <Sponsors /> */}
 				</div>
 
 				<About />
