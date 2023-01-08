@@ -1,0 +1,51 @@
+@use "../../abstracts" as ab;
+
+.sponsors {
+	width: min(90%, 80rem);
+	margin-inline: auto;
+	margin-top: 5em;
+
+	display: flex;
+	overflow-x: hidden;
+
+	.marquee {
+		max-width: 100%;
+		animation: scrolling 15s linear infinite;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8em;
+		flex-wrap: wrap;
+		flex-direction: column;
+		max-height: 4rem;
+	}
+
+	&-item {
+		&.ens {
+			div {
+				display: flex;
+				gap: 0.5em;
+				margin-inline: auto;
+				justify-content: center;
+			}
+			img {
+				width: 3rem;
+				margin-inline: 0;
+			}
+		}
+
+		img {
+			margin-inline: auto;
+			width: 13rem;
+		}
+	}
+}
+
+@keyframes scrolling {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translatex(-4166.4px);
+	}
+}
