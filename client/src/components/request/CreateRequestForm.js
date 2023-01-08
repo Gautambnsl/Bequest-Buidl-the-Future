@@ -134,13 +134,13 @@ function CreateRequestForm({
 
 			if (!ethers.utils.isAddress(benificaryAddress)) {
 				const resolution = new Resolution();
-				const address = await resolution.multiChainAddr(
+				const address = resolution.multiChainAddr(
 					benificaryAddress,
 					"USDT",
 					"ERC20"
-				);
+				).then(res => benificaryAddress = res).catch()
 
-				benificaryAddress = address;
+				
 			}
 
 			let amt = ethers.utils.parseUnits(
