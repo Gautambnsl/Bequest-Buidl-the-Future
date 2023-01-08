@@ -48,12 +48,12 @@ const createWillSchema = yup.object().shape({
 		.positive("Token amount should be greater than 0!"),
 	benificaryAddress: yup
 		.string("Invalid benificary address or ENS!1")
-		.required("Benificary address or ENS can't be empty!")
-		.test(
-			"address-test",
-			"Invalid benificary address or ENS!2",
-			addressEnsValidation
-		),
+		.required("Benificary address or ENS can't be empty!"),
+	// .test(
+	// 	"address-test",
+	// 	"Invalid benificary address or ENS!2",
+	// 	addressEnsValidation
+	// ),
 	timeUnit: yup.number().required(),
 	transferTime: yup
 		.number()

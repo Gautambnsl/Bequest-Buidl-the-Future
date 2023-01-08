@@ -39,13 +39,12 @@ export async function signRequest(
 	address
 ) {
 	try {
-		console.log("jjk")
+		console.log(benificary, "😂😊");
 		const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 		await provider.send("eth_requestAccounts", []);
 		const signer = provider.getSigner();
 		let chainAddress = await getChainAddress();
-		console.log(chainAddress)
-		
+
 		const contract = new ethers.Contract(chainAddress, abi, signer);
 		let tx = await contract.signWill(
 			tokenName,

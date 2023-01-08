@@ -11,8 +11,9 @@ import {
 import { ethers } from "ethers";
 import Error from "../Error";
 import Success from "../Success";
+const { default: Resolution } = require("@unstoppabledomains/resolution");
 
-function CreateWillForm({
+function CreateRequestForm({
 	tokenDetails,
 	setLoading,
 	tokenFees,
@@ -129,22 +130,17 @@ function CreateWillForm({
 
 	const sign = async (willInfo) => {
 		try {
-			let isEth = false;
 			let benificaryAddress = willInfo.benificaryAddress;
 
-			let tempIndex = willInfo.benificaryAddress.indexOf(".");
-			if (tempIndex) {
-				let ethString = willInfo.benificaryAddress.slice(tempIndex);
-
-				if (ethString === ".eth") isEth = true;
-			}
-
-			if (isEth) {
-				benificaryAddress = await providerRef.current.resolveName(
-					willInfo.benificaryAddress
+			if (!ethers.utils.isAddress(benificaryAddress)) {
+				const resolution = new Resolution();
+				const address = await resolution.multiChainAddr(
+					benificaryAddress,
+					"USDT",
+					"ERC20"
 				);
 
-				if (!benificaryAddress) throw "Invalid Unstoppable Name!";
+				benificaryAddress = address;
 			}
 
 			let amt = ethers.utils.parseUnits(
@@ -290,7 +286,7 @@ function CreateWillForm({
 			/>
 
 			<Input
-				label={"Benificary Address or ENS"}
+				label={"Benificary Address or Unstoppable Domain"}
 				type="text"
 				error={errors.benificaryAddress}
 				register={register}
@@ -367,4 +363,4 @@ function CreateWillForm({
 	);
 }
 
-export default CreateWillForm;
+export default CreateRequestForm;
